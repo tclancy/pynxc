@@ -1,0 +1,28 @@
+For the GUI interface, run
+
+    pynxc.pyw
+    
+    
+It can also be run on the commandline:
+
+./pynxc.pyw -help
+Usage: pynxc.pyw [options] [filename]
+
+Options:
+  -h, --help           show this help message and exit
+  -c, --compile        compile to nxc code only
+  --debug              show debug messages
+  --show_nxc           show the nxc code
+  -d, --download       download program
+  -B, --bluetooth      enable bluetooth
+  --firmware=FIRMWARE  firmware version (105, 107, or 128)
+  --command=<command>  what is the nxc/nqc command  
+  
+You need to have the nxc binary (usually called nbc) in the nxc folder 
+for this to work.  Simply extract the entire folder for your operating
+system in the nxc folder.
+
+You can get the latest releases of nxc from:
+
+    http://bricxcc.sourceforge.net/nbc/
+    

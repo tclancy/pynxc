@@ -1,0 +1,12 @@
+<pre><font face="Lucida,Courier New"><font color="#000000">DEFINE</font> <font color="#000000">turn_around</font><font color="#0000C0">=</font><font color="#000000">OnRev</font><font color="#0000C0">(</font><font color="#000000">OUT_B</font><font color="#0000C0">,</font> <font color="#0080C0">75</font><font color="#0000C0">)</font><font color="#0000C0">;</font> <font color="#000000">Wait</font><font color="#0000C0">(</font><font color="#0080C0">3400</font><font color="#0000C0">)</font><font color="#0000C0">;</font> <font color="#000000">a</font><font color="#0000C0">=</font><font color="#0080C0">5</font><font color="#0000C0">;</font> <font color="#000000">OnFwd</font><font color="#0000C0">(</font><font color="#000000">OUT_AB</font><font color="#0000C0">,</font> <font color="#0080C0">75</font><font color="#0000C0">)</font><font color="#0000C0">;</font>
+
+<font color="#C00000">def</font> <font color="#000000">main</font><font color="#0000C0">(</font><font color="#0000C0">)</font><font color="#0000C0">:</font>
+    <font color="#000000">a</font><font color="#0000C0">=</font><font color="#0080C0">0</font>
+    <font color="#000000">OnFwd</font><font color="#0000C0">(</font><font color="#000000">OUT_AB</font><font color="#0000C0">,</font> <font color="#0080C0">75</font><font color="#0000C0">)</font>
+    <font color="#000000">Wait</font><font color="#0000C0">(</font><font color="#0080C0">1000</font><font color="#0000C0">)</font>
+    <font color="#000000">turn_around</font>
+    <font color="#000000">Wait</font><font color="#0000C0">(</font><font color="#0080C0">2000</font><font color="#0000C0">)</font>
+    <font color="#000000">turn_around</font>
+    <font color="#000000">Wait</font><font color="#0000C0">(</font><font color="#0080C0">1000</font><font color="#0000C0">)</font>
+    <font color="#000000">turn_around</font>
+    <font color="#000000">Off</font><font color="#0000C0">(</font><font color="#000000">OUT_AB</font><font color="#0000C0">)</font><font color="#000000"></font></font></pre>
