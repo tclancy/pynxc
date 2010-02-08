@@ -5,7 +5,6 @@ __author__  = 'Brian Blais <bblais@bryant.edu>'
 __version__ = (0,1,6)
 
 
-import ConfigParser
 import ast_template
 import sys
 from compiler import parse, walk
@@ -15,6 +14,8 @@ import os
 import subprocess
 from optparse import OptionParser
 import re
+import yaml
+
 
 pynxc_root,junk=os.path.split(sys.argv[0])
 #pynxc_root=os.getcwd()
@@ -1000,16 +1001,18 @@ def python_to_nxc(pyfile,nxcfile=None,debug=False):
     if not fid==sys.stdout:
         fid.close()
     
+def readconfig(fname):
+    config={'firmware':'105'}
+    
+    if os.path.exists(fname):
+        data=yaml.load(open(fname))        
+        config.update(data)
+    
+    return config
     
 def main():
 
-    config = ConfigParser.ConfigParser()
-    fname=config.read("pynxc.ini")
-    if not fname:
-        firmware='105'
-    else:
-        firmware=config.get("main","firmware version")
-
+    config=readconfig(fname)
     nxc=os.path.join("nxc",sys.platform,'nbc')
 
     usage="usage: %prog [options] [filename]"
@@ -1042,7 +1045,7 @@ def main():
         parser.print_help()
         raise SystemExit
     
-    
+    options.firmware=config['firmware']
 
     # sanity check on the options
     
@@ -1127,34 +1130,15 @@ class MainFrame(Frame):
         self.DoCmd(cmdlist)
         
     def ReadConfig(self):
-        import ConfigParser
-
-        config = ConfigParser.ConfigParser()        
-        fname=config.read("pynxc.ini")
-        if not fname:  # no file..make default
-            self.DefaultConfig()
-        else:
-            self.firmware_version=str(config.get("main","firmware version"))
-            
-    def DefaultConfig(self):
-        self.firmware_version='105'
-
-        config = ConfigParser.ConfigParser()
-
-        config.add_section("main")
-        config.set("main","firmware version",self.firmware_version)
-        
-        with open("pynxc.ini",'w') as fid:
-            config.write(fid)
+    
+        config=readconfig('pynxc.yaml')
+        self.firmware_version=str(config['firmware'])
             
     def UpdateConfig(self):
-        config = ConfigParser.ConfigParser()        
-        fname=config.read("pynxc.ini")
-        config.set("main","firmware version",self.firmware_version)
-        with open("pynxc.ini",'w') as fid:
-            config.write(fid)
-
-            
+    
+        config={'firmware':self.firmware_version}
+        with open("pynxc.yaml",'w') as fid:
+            yaml.dump(config,fid,default_flow_style=False)
     
     def CreateMenu(self):
     
