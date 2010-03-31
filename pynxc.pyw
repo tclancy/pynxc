@@ -1012,8 +1012,10 @@ def readconfig(fname):
     
 def main():
 
-    config=readconfig(fname)
+    config=readconfig('pynxc.yaml')
     nxc=os.path.join("nxc",sys.platform,'nbc')
+    if not os.path.exists(nxc):
+        nxc = 'nbc' # expect 'nbc' in the binary PATH
 
     usage="usage: %prog [options] [filename]"
     parser = OptionParser(usage=usage)
@@ -1034,7 +1036,7 @@ def main():
                     help='enable bluetooth',default=False,
                     action="store_true")
     parser.add_option('--firmware', dest="firmware",
-                      help='firmware version (105, 107, or 128)',default=firmware)
+                      help='firmware version (105, 107, or 128)',default=config['firmware'])
     parser.add_option('--command',  dest="nxc",
                       help='what is the nxc/nqc command',default=nxc,
                       metavar="<command>")
@@ -1113,6 +1115,9 @@ class MainFrame(Frame):
         self.ReadConfig()
     
         self.nxc=os.path.join("nxc",sys.platform,'nbc')
+        if not os.path.exists(self.nxc):
+            nxc = 'nbc' # expect 'nbc' in the binary PATH
+
         self.prog=None
 
         self.CreateMenu()
@@ -1228,7 +1233,11 @@ class MainFrame(Frame):
                     cmdlist,stdin=subprocess.PIPE,
                     stdout=subprocess.PIPE,stderr=subprocess.PIPE,close_fds=True)
 
-            S=S+''.join(output.stdout.readlines())+''.join(output.stderr.readlines())
+            try: # there might be non-ASCII chars in the output
+                S += output.stdout.read() + output.stderr.read()
+            except UnicodeDecodeError:
+                S += (output.stdout.read() + output.stderr.read()
+                     ).decode('utf-8', 'replace')
             
             self.textbox.SetValue(S)
                 

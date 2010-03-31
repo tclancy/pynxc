@@ -1,0 +1,4 @@
+CurrentTick is of type long, and casting doesn't work automatically 
+  ==> make variables with t=CurrentTick()  of type long
+  
+  
