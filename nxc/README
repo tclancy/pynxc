@@ -1,22 +1,10 @@
-NXC can be found here:
+Latest source of NXC can be found here:
 
-Windows:
-    http://bricxcc.sourceforge.net/test_release.zip
-    
-    Place the nbc.exe in the win32 folder
-    
-Mac:
-    http://bricxcc.sourceforge.net/nbc/beta/nbc-1.0.1.b36.osx.tgz
-    
-    Place nbc and nxtcom in the darwin folder
-    
-Linux:
-    http://bricxcc.sourceforge.net/nbc/beta/nbc-1.0.1.b36.tgz
+http://bricxcc.svn.sourceforge.net/viewvc/bricxcc/
 
-    Haven't implemented for linux.  Take the nbc, and put it in a folder
-    with the name obtained by:
-    
-    import sys
-    print sys.platform
-    
-    
+under the MOZILLA PUBLIC LICENSE Version 1.1 (http://bricxcc.svn.sourceforge.net/viewvc/bricxcc/LICENSE)
+
+Latest binaries can be found here:
+
+http://bricxcc.sourceforge.net/nbc/
+
