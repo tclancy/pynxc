@@ -1134,6 +1134,8 @@ class MainFrame(Frame):
         cmdlist=[self.nxc]
         self.DoCmd(cmdlist)
         
+        self.ResetTitle()
+        
     def ReadConfig(self):
     
         config=readconfig('pynxc.yaml')
@@ -1185,8 +1187,10 @@ class MainFrame(Frame):
         
         self.menubar.Append(self.nxt_menu, "&NXT")
             
+            
         self.SetMenuBar(menubar)
 
+        
     def FirmwareVersion(self,event):
         versions={'Version 105':'105',
         'Version 107':'107',
@@ -1206,9 +1210,19 @@ class MainFrame(Frame):
             result = dlg.ShowModal()
             if result == 'ok':
                 self.prog = dlg.GetPaths()[0]
+                self.ResetTitle()
         finally:
             dlg.Destroy()
     
+    def ResetTitle(self,event=None):
+        if self.prog:
+            junk,fname=os.path.split(self.prog)
+            s='PyNXC: %s' % fname
+        else:
+            s='PyNXC'
+            
+        self.SetTitle(s)
+        
             
     def NXT_Info(self,event=None):
         pass
